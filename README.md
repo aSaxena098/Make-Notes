@@ -3,7 +3,7 @@
 
 - Using Salesforce Experinece Builder.
 - Recenetly created/edited records are diplayed on the top.
-- Proper Toast Messages and confirmation Pop ups are displayed fro the user.
+- Proper Toast Messages and confirmation Pop ups are displayed for the user.
 - Web app is resposnsive and can be accessed from anywhere from any device.
 - User friendly UI.
 
