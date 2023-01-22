@@ -1,0 +1,48 @@
+<template>
+   <c-notification></c-notification>
+   <div class="app">
+      <div class="box box-center" onclick={createNoteHandler}>
+         <div class="dotted-circle">
+            <lightning-icon class="dotted-circle" icon-name='utility:add' alternative-text='add' size='large'
+               title='add'></lightning-icon>
+         </div>
+         <h1><strong>Add Note</strong></h1>
+      </div>
+
+      <template for:each={noteListiInfo} for:item="note">
+         <div key={note.Id} class="box slds-var-m-bottom_medium">
+            <header>
+               <h1 class="slds-truncate"><strong>{note.Name}</strong></h1>
+            </header>
+            <div class="notes">
+               <c-appendhtml result={note.Description__c}></c-appendhtml>
+            </div>
+            <footer class="footer">
+               <div class="date">{note.formattedDate}</div>
+               <div>
+                  <lightning-icon class="edit-icon" icon-name='action:edit' alternative-text='edit' size='small'
+                     title='edit Note' data-recordid={note.Id} onclick={editNoteHandler}></lightning-icon>
+                  <lightning-icon class="delete-icon" icon-name='action:delete' alternative-text='delete' size='small'
+                     title='Delete Note' onclick={deleteNoteHandler} data-recordid={note.Id}></lightning-icon>
+               </div>
+            </footer>
+         </div>
+      </template>
+   </div>
+   <template if:true={showModal}>
+      <c-modal>
+         <h1 slot="header" class="slds-modal__title">Add Note</h1>
+         <form>
+            <lightning-input value={noteRecord.Name} type="text" label="Title" name="Name"
+               class="slds-var-m-bottom_medium" onchange={changeHandler}></lightning-input>
+            <lightning-input-rich-text value={noteRecord.Note_Description} label-visible label="Description"
+               formats={formats} name="Note_Description" onchange={changeHandler}>
+            </lightning-input-rich-text>
+         </form>
+         <footer slot="footer">
+            <button class="slds-button slds-button_neutral" onclick={closeModalHandler}>Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={submitHandler} disabled={isFormInavlid}>Save</button>
+         </footer>
+      </c-modal>
+   </template>
+</template>
